@@ -18,15 +18,16 @@ app.use(express.json());
 app.use(notFound);
 app.use(errorHandler);
 
-const productRoutes = require("./routes/product");
-const categoryRoutes = require("./routes/category");
-const ownerRoutes = require("./routes/owner");
-const userRoutes = require("./routes/auth");
-const reviewRoutes = require("./routes/review");
-const addressRoutes = require("./routes/address");
-const paymentRoutes = require("./routes/payment");
-const orderRoutes = require("./routes/order");
-const searchRoutes = require("./routes/search");
+const productRoutes = require("./routes/product.routes");
+const authRoutes = require("./routes/auth.routes");
+const userRoutes = require("./routes/user.routes");
+const categoryRoutes = require("./routes/category.routes");
+// const ownerRoutes = require("./routes/owner");
+// const reviewRoutes = require("./routes/review");
+// const addressRoutes = require("./routes/address");
+// const paymentRoutes = require("./routes/payment");
+// const orderRoutes = require("./routes/order");
+// const searchRoutes = require("./routes/search");
 
 app.get("/api/v1/", (req, res) => {
   res.status(200).json({
@@ -35,14 +36,14 @@ app.get("/api/v1/", (req, res) => {
 });
 app.use("api/v1/amazon_like/auth", authRoutes);
 app.use("api/v1/amazon_like/product", productRoutes);
-app.use("api/v1/amazon_like/category", categoryRoutes);
-app.use("api/v1/amazon_like/owner", ownerRoutes);
 app.use("api/v1/amazon_like/user", userRoutes);
-app.use("api/v1/amazon_like/review", reviewRoutes);
-app.use("api/v1/amazon_like/address", addressRoutes);
-app.use("api/v1/amazon_like/payment", paymentRoutes);
-app.use("api/v1/amazon_like/order", orderRoutes);
-app.use("api/v1/amazon_like/search", searchRoutes);
+app.use("api/v1/amazon_like/category", categoryRoutes);
+// app.use("api/v1/amazon_like/owner", ownerRoutes);
+// app.use("api/v1/amazon_like/review", reviewRoutes);
+// app.use("api/v1/amazon_like/address", addressRoutes);
+// app.use("api/v1/amazon_like/payment", paymentRoutes);
+// app.use("api/v1/amazon_like/order", orderRoutes);
+// app.use("api/v1/amazon_like/search", searchRoutes);
 
 const port = process.env.PORT || 3000;
 const start = async () => {

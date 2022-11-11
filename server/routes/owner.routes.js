@@ -2,13 +2,14 @@ const express = require("express");
 const router = express.Router();
 const ownerController = require("../controllers/owner.controller");
 
-const upload = require("../middlewares/upload-photo");
+// const upload = require("../middlewares/upload-photo");
 
 router
   .route("/")
   .get(ownerController.getAllOwners)
-  .post("/", upload.single("photo"), ownerController.createOwner);
+  //   .post("/", upload.single("photo"), ownerController.createOwner);
+  .post(ownerController.createOwner);
 
-router.route("/:id").get(ownerController.getSingleOwner);
+// router.route("/:id").get(ownerController.getSingleOwner);
 
 module.exports = router;

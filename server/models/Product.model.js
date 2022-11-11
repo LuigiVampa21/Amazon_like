@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
-const mongooseAlgolia = require("mongoose-algolia");
 const Schema = mongoose.Schema;
+// const mongooseAlgolia = require("mongoose-algolia");
 
 const ProductSchema = new Schema(
   {
-    category: { type: Schema.Types.ObjectId, ref: "Category" },
-    owner: { type: Schema.Types.ObjectId, ref: "Owner" },
+    // category: { type: Schema.Types.ObjectId, ref: "Category" },
+    // owner: { type: Schema.Types.ObjectId, ref: "Owner" },
     title: String,
     description: String,
-    photo: String,
+    // photo: String,
     price: Number,
     stockQuantity: Number,
-    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+    // reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
   {
     toObject: { virtuals: true },

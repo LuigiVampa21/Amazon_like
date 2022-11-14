@@ -37,14 +37,14 @@
               </div>
               <!-- Title input -->
               <div class="a-spacing-top-medium">
-                <label style="margin-bottom: 0px;">Title</label>
-                <!-- <input type="text" class="a-input-text" style="width: 100%" v-model="title" /> -->
+                <label>Title</label>
+                <input type="text" class="a-input-text" style="width: 100%" v-model="title" />
               </div>
 
               <!-- Price input -->
               <div class="a-spacing-top-medium">
                 <label style="margin-bottom: 0px;">Price</label>
-                <!-- <input type="number" class="a-input-text" style="width: 100%" v-model="price" /> -->
+                <input type="number" class="a-input-text" style="width: 100%" v-model="price" />
               </div>
 
               <!-- StockQuantity input -->
@@ -61,11 +61,11 @@
               <!-- Description textarea -->
               <div class="a-spacing-top-medium">
                 <label style="margin-bottom: 0px;">Description</label>
-                <!-- <textarea
+                <textarea
                   placeholder="Provide details such as a product description"
                   style="width: 100%"
                   v-model="description"
-                ></textarea> -->
+                ></textarea>
               </div>
 
               <!-- Photo file -->
@@ -74,9 +74,8 @@
                 <div class="a-row a-spacing-top-medium">
                   <label class="choosefile-button">
                     <i class="fal fa-plus"></i>
-                    <!-- <input type="file" @change="onFileSelected" /> -->
-                    <!-- <p style="margin-top: -70px">{{ fileName }}</p> -->
-                    <p style="margin-top: -70px">fileName</p>
+                    <input type="file" @change="onFileSelected" />
+                    <p style="margin-top: -70px">{{ fileName }}</p>
                   </label>
                 </div>
               </div>
@@ -85,7 +84,7 @@
               <div class="a-spacing-top-large">
                 <span class="a-button-register">
                   <span class="a-button-inner">
-                    <!-- <span class="a-button-text" @click="onAddProduct">Add product</span> -->
+                    <span class="a-button-text" @click="onAddProduct">Add product</span>
                   </span>
                 </span>
               </div>
@@ -115,6 +114,42 @@ export default {
 
   }catch(err){
     console.error(err);
+  }
+ },
+ data(){
+  return{
+    categoryID: null,
+    ownerID: null,
+    title: "",
+    price: 0,
+    description: "",
+    selectedFile: null,
+    stockQuantity: 1,
+    fileName: "",
+  }
+ },
+
+ methods: {
+  onFileSelected(event){
+    this.selectedFile = event.target.files[0];
+    this.fileName = event.target.files[0].name;
+  },
+
+  async onAddProduct(){
+    const data = new FormData();
+    data.append('title', this.title);
+    data.append('price', this.price);
+    data.append('ownerID', this.ownerID);
+    data.append('stockQuantity', this.stockQuantity);
+    data.append('categoryID', this.categoryID);
+    data.append('description', this.description);
+    data.append('stockQuantity', this.stockQuantity);
+    // data.append('photo', this.selectedFile, this.fileName);
+
+    const result = await this.$axios.$post('http://localhost:5000/api/v1/amazon/products', data)
+    console.log(result);
+
+    this.$router.push('/')
   }
  }
 }

@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "../Client/src/assets/images");
+    cb(error, "../admin/static/photos");
   },
   filename: (req, file, cb) => {
     const name = req.userData.userID;

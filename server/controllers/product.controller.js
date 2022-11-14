@@ -15,7 +15,17 @@ exports.getAllProducts = async (req, res) => {
 exports.createProduct = async (req, res) => {
   //   const { userID } = req.user;
   //   req.body.user = userID;
-  const product = await Product.create(req.body);
+  const product = await Product.create({
+    ownerID: req.body.ownerID,
+    categoryID: req.body.categoryID,
+    price: req.body.price,
+    title: req.body.title,
+    description: req.body.description,
+    ownerID: req.body.ownerID,
+    categoryID: req.body.categoryID,
+    // photo: req.file.location,
+    stockQuantity: req.body.stockQuantity,
+  });
   res.status(StatusCodes.CREATED).json({
     product,
   });

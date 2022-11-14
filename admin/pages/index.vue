@@ -53,10 +53,6 @@
             </div>
             <!-- Product Buttons -->
 
-
-            <!-- <a href="#" class="a-button-history margin-right-10">Update</a>
-            <a href="#" class="a-button-history margin-right-10">Delete</a> -->
-
             <div class="a-row">
               <nuxt-link
                 :to="`/products/${product._id}`"
@@ -85,6 +81,16 @@ export default {
       return products
     }catch(err){
       console.error(err);
+    }
+  },
+  methods: {
+    async onDeleteProduct(id, index){
+      try{
+        await this.$axios.$delete(`http://localhost:5000/api/v1/amazon/products/${id}`)
+        this.products.splice(index,1)
+      }catch(err){
+        console.error(err);
+      }
     }
   }
 

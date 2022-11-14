@@ -31,16 +31,16 @@ exports.createProduct = async (req, res) => {
   });
 };
 
-// exports.getSingleProduct = async (req, res) => {
-//   const productsID = req.params.id;
-//   const product = await Product.findById(productsID).populate("reviews");
-//   if (!product) {
-//     throw new CustomError.NotFoundError("No product found with that id");
-//   }
-//   res.status(StatusCodes.OK).json({
-//     product,
-//   });
-// };
+exports.getSingleProduct = async (req, res) => {
+  const { id } = req.params;
+  const product = await Product.findById(id);
+  if (!product) {
+    throw new CustomError.NotFoundError("No product found with that id");
+  }
+  res.status(StatusCodes.OK).json({
+    product,
+  });
+};
 
 // exports.updateProduct = async (req, res) => {
 //   const productsID = req.params.id;
@@ -56,17 +56,17 @@ exports.createProduct = async (req, res) => {
 //   });
 // };
 
-// exports.deleteProduct = async (req, res) => {
-//   const productsID = req.params.id;
-//   const product = await Product.findById(productsID);
-//   if (!product) {
-//     throw new CustomError.NotFoundError("No product found with that id");
-//   }
-//   await product.remove();
-//   res.status(StatusCodes.OK).json({
-//     data: null,
-//   });
-// };
+exports.deleteProduct = async (req, res) => {
+  const productsID = req.params.id;
+  const product = await Product.findById(productsID);
+  if (!product) {
+    throw new CustomError.NotFoundError("No product found with that id");
+  }
+  await product.remove();
+  res.status(StatusCodes.OK).json({
+    data: null,
+  });
+};
 
 // exports.uploadImage = async (req, res) => {
 //   console.log(req.files);

@@ -36,3 +36,53 @@
     </div>
   </main>
 </template>
+
+<script>
+export default ({
+  setup() {
+    return{
+      type: ""
+    }
+
+  },
+   async asyncData({ $axios }){
+  try{
+    const data = await $axios.$get('http://localhost:5000/api/v1/amazon/categories')
+  return {
+    categories: data.categories,
+  }
+
+  }catch(err){
+    console.error(err);
+  }
+ },
+  methods: {
+    async onAddCategory(){
+      try{
+        const data = {type: this.type}
+       const category = await this.$axios.$post('http://localhost:5000/api/v1/amazon/categories', data
+       );
+      this.categories.push(data);
+      }catch(err){
+        console.error(err);
+      }
+    }
+  }
+})
+</script>
+
+
+
+<style>
+
+.container-fluid{
+  width: 60%;
+  margin: auto;
+}
+
+.list-group-item{
+  border: 1px solid grey;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+</style>

@@ -12,7 +12,8 @@ exports.getAllCategories = async (req, res) => {
 
 exports.createCategory = async (req, res) => {
   const { type } = req.body;
-  const category = await Category.create({type});
+  console.log(req.body);
+  const category = await Category.create({ type });
   res.status(StatusCodes.OK).json({
     category,
   });

@@ -13,6 +13,7 @@ exports.getAllOwners = async (req, res) => {
 
 exports.createOwner = async (req, res) => {
   const { name, about } = req.body;
+  console.log(req.body);
   //   const photo = req.file.location;
 
   // let owner = new Owner();

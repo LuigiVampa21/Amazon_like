@@ -56,7 +56,7 @@
 export default {
   async asyncData({ $axios }) {
     try {
-      let response = await $axios.$get("http://localhost:3000/api/owners");
+      const response = await $axios.$get("http://localhost:5000/api/v1/amazon/owners");
       return {
         owners: response.owners
       };
@@ -79,15 +79,18 @@ export default {
     },
     async onAddOwner() {
       try {
-        let data = new FormData();
-        data.append("name", this.name);
-        data.append("about", this.about);
-        data.append("photo", this.selectedFile, this.selectedFile.name);
+        const data = new FormData()
+          data.append('name', this.name);
+          data.append('about', this.about);
+        // data.append("photo", this.selectedFile, this.selectedFile.name);
+        console.log(this.name);
         const response = await this.$axios.$post(
-          "http://localhost:3000/api/owners",
-          data
+          "http://localhost:5000/api/v1/amazon/owners",{
+            name: this.name,
+            about: this.about,
+          }
         );
-        this.owners.push(this.name);
+        this.owners.push({name: this.name});
         console.log(this.owners);
       } catch (err) {
         console.log(err);
@@ -96,4 +99,18 @@ export default {
   }
 };
 </script>
+
+<style>
+
+.container-fluid{
+  width: 60%;
+  margin: auto;
+}
+
+.list-group-item{
+  border: 1px solid grey;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+</style>
 
